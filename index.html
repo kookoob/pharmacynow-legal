@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>약국나우 · 개인정보처리방침 / Privacy Policy</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #1f2937;
+        --muted: #6b7280;
+        --brand: #16a34a;
+        --border: #e5e7eb;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0a0a0a;
+          --fg: #e5e7eb;
+          --muted: #9ca3af;
+          --brand: #22c55e;
+          --border: #1f2937;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+          "Noto Sans KR", "Pretendard", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.6;
+      }
+      header {
+        background: var(--brand);
+        color: #fff;
+        padding: 1.5rem 1rem;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+      header p {
+        margin: 0.25rem 0 0;
+        opacity: 0.9;
+        font-size: 0.85rem;
+      }
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem 4rem;
+      }
+      nav.lang {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      nav.lang a {
+        flex: 1;
+        text-align: center;
+        padding: 0.6rem;
+        background: var(--border);
+        color: var(--fg);
+        border-radius: 9999px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      nav.lang a.active {
+        background: var(--brand);
+        color: #fff;
+      }
+      section h2 {
+        font-size: 1rem;
+        margin: 2rem 0 0.5rem;
+        color: var(--brand);
+      }
+      section h3 {
+        font-size: 0.9rem;
+        margin: 1rem 0 0.25rem;
+      }
+      section p,
+      section li {
+        font-size: 0.9rem;
+        color: var(--fg);
+      }
+      section ul {
+        padding-left: 1.2rem;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 1.25rem 0;
+        margin-top: 3rem;
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-align: center;
+      }
+      .hidden { display: none; }
+    </style>
+    <script>
+      function show(lang) {
+        document.querySelectorAll('section[data-lang]').forEach((el) => {
+          el.classList.toggle('hidden', el.dataset.lang !== lang);
+        });
+        document.querySelectorAll('nav.lang a').forEach((a) => {
+          a.classList.toggle('active', a.dataset.lang === lang);
+        });
+        document.documentElement.lang = lang;
+      }
+      window.addEventListener('DOMContentLoaded', () => {
+        const saved = localStorage.getItem('lang');
+        const init = saved || (navigator.language || 'ko').startsWith('ko') ? 'ko' : 'en';
+        show(init);
+        document.querySelectorAll('nav.lang a').forEach((a) => {
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.setItem('lang', a.dataset.lang);
+            show(a.dataset.lang);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>약국나우 개인정보처리방침</h1>
+      <p>PharmacyNow Privacy Policy</p>
+    </header>
+    <div class="container">
+      <nav class="lang">
+        <a href="#ko" data-lang="ko">한국어</a>
+        <a href="#en" data-lang="en">English</a>
+      </nav>
+
+      <section data-lang="ko">
+        <p class="meta">최종 업데이트: 2026-04-16</p>
+        <p>
+          약국나우(이하 "본 앱")는 사용자의 개인정보를 중요시하며, 「개인정보 보호법」을
+          준수합니다. 본 개인정보처리방침은 본 앱이 어떠한 정보를 수집하고, 어떤 목적으로
+          이용하며, 어떻게 관리하는지 설명합니다.
+        </p>
+
+        <h2>1. 수집하는 정보</h2>
+        <h3>위치 정보</h3>
+        <ul>
+          <li>수집 항목: GPS 기반 현재 위치 (위도·경도)</li>
+          <li>이용 목적: 근처 약국 검색, 거리·도착시간 계산, 지도 표시</li>
+          <li>수집 방법: OS 위치 서비스, 사용자의 명시적 동의 후에만 수집</li>
+          <li>보관: 기기에만 저장되며, 서버로 전송되지 않습니다.</li>
+        </ul>
+
+        <h3>서버 저장 정보 (Supabase)</h3>
+        <ul>
+          <li>약국 리뷰: 별점·코멘트, 익명 디바이스 ID (개인 식별 불가)</li>
+          <li>영업정보 오류 신고: 신고 유형·메모, 익명 디바이스 ID</li>
+          <li>복약 공유 스냅샷: 사용자가 "가족과 공유" 기능을 사용할 때만, 30일 후 자동 삭제</li>
+        </ul>
+
+        <h3>로컬 저장 정보 (기기에만)</h3>
+        <ul>
+          <li>즐겨찾기한 약국·약품 목록</li>
+          <li>방문 기록, 단골 약국 점수</li>
+          <li>복약 알림 설정 및 복용 기록</li>
+          <li>부작용 일지</li>
+          <li>사용자가 첨부한 처방전·약 사진</li>
+        </ul>
+
+        <h2>2. 개인정보의 제3자 제공</h2>
+        <p>본 앱은 사용자의 개인정보를 어떠한 제3자에게도 판매·제공하지 않습니다.</p>
+
+        <h2>3. 외부 서비스 이용 (처리 위탁)</h2>
+        <ul>
+          <li>
+            <strong>Supabase (클라우드 DB 호스팅)</strong> — 약국·약품 데이터, 리뷰·신고,
+            복약 공유 스냅샷을 저장합니다.
+          </li>
+          <li>
+            <strong>카카오맵 JavaScript SDK</strong> — 지도 표시 시 사용자 위치가 카카오
+            서버로 전송됩니다. 카카오 개인정보처리방침이 별도 적용됩니다.
+          </li>
+          <li>
+            <strong>공공데이터포털</strong> — 약국·의약품 정보 수집. 수집은 서버 측 배치로만
+            이루어지며 사용자 정보는 전송되지 않습니다.
+          </li>
+        </ul>
+
+        <h2>4. 개인정보의 보관 및 파기</h2>
+        <ul>
+          <li>로컬 저장 정보: 앱 삭제 또는 설정에서 '전체 삭제' 시 즉시 파기</li>
+          <li>리뷰·신고: 사용자 요청 시 개별 삭제 가능</li>
+          <li>복약 공유 스냅샷: 생성 후 30일 경과 시 자동 파기</li>
+        </ul>
+
+        <h2>5. 앱 권한 사용</h2>
+        <ul>
+          <li><strong>위치 (필수)</strong>: 근처 약국 검색. "앱 사용 중"만 접근.</li>
+          <li><strong>카메라 (선택)</strong>: 처방전·약 사진 촬영. 기기에만 저장.</li>
+          <li><strong>알림 (선택)</strong>: 복약 시간 리마인더.</li>
+          <li><strong>사진 라이브러리 (선택)</strong>: 기존 사진 첨부.</li>
+        </ul>
+
+        <h2>6. 사용자의 권리</h2>
+        <p>
+          사용자는 언제든지 앱 설정에서 로컬 데이터를 삭제할 수 있으며, 서버에 저장된 리뷰·신고·공유
+          스냅샷의 삭제를 요청할 수 있습니다. 요청은 아래 문의처로 보내주세요.
+        </p>
+
+        <h2>7. 아동(만 14세 미만) 정보 보호</h2>
+        <p>본 앱은 만 14세 미만 아동의 개인정보를 의도적으로 수집하지 않습니다.</p>
+
+        <h2>8. 보안 조치</h2>
+        <ul>
+          <li>서버 통신은 전 구간 HTTPS 암호화</li>
+          <li>Supabase Row Level Security로 무단 접근 차단</li>
+          <li>민감 정보(처방전 사진 등)는 기기 로컬에만 저장</li>
+        </ul>
+
+        <h2>9. 방침의 변경</h2>
+        <p>
+          본 방침이 변경될 경우 앱 내 공지 및 본 페이지에 업데이트하며, 중요한 변경은 사전에
+          공지합니다.
+        </p>
+
+        <h2>10. 문의처</h2>
+        <p>
+          이메일: <a href="mailto:kyongg02@gmail.com">kyongg02@gmail.com</a>
+        </p>
+      </section>
+
+      <section data-lang="en" class="hidden">
+        <p class="meta">Last updated: 2026-04-16</p>
+        <p>
+          PharmacyNow ("the App") respects your privacy and complies with the Korean Personal
+          Information Protection Act. This Privacy Policy explains what information is
+          collected, how it is used, and how it is managed.
+        </p>
+
+        <h2>1. Information We Collect</h2>
+        <h3>Location</h3>
+        <ul>
+          <li>GPS coordinates of your current location</li>
+          <li>Used to find nearby pharmacies and calculate distance/ETA</li>
+          <li>Collected only with your explicit OS-level permission</li>
+          <li>Stored on-device only; never transmitted to our servers</li>
+        </ul>
+
+        <h3>Server-stored data (Supabase)</h3>
+        <ul>
+          <li>Pharmacy reviews (rating, comment, anonymous device ID)</li>
+          <li>Data error reports (kind, note, anonymous device ID)</li>
+          <li>Medication share snapshots — only when you tap "Share with family"; auto-deleted after 30 days</li>
+        </ul>
+
+        <h3>On-device data (never leaves your device)</h3>
+        <ul>
+          <li>Favorite pharmacies and drugs</li>
+          <li>Visit history and frequency scores</li>
+          <li>Medication reminders and adherence logs</li>
+          <li>Side effect journal</li>
+          <li>Prescription or drug photos you attach</li>
+        </ul>
+
+        <h2>2. Third-party Disclosure</h2>
+        <p>We do not sell or share your personal information with any third party.</p>
+
+        <h2>3. Processors</h2>
+        <ul>
+          <li><strong>Supabase</strong> — stores pharmacy data, reviews, reports, and share snapshots.</li>
+          <li>
+            <strong>Kakao Map JavaScript SDK</strong> — your location is sent to Kakao servers
+            when the map is displayed. Kakao's own privacy policy applies.
+          </li>
+          <li>
+            <strong>Korea Public Data Portal</strong> — used only for server-side batch jobs
+            to collect pharmacy and drug data; no user data is transmitted.
+          </li>
+        </ul>
+
+        <h2>4. Retention & Deletion</h2>
+        <ul>
+          <li>On-device data: deleted when you uninstall the app or tap "Delete all" in settings.</li>
+          <li>Reviews/reports: individually deletable on request.</li>
+          <li>Share snapshots: automatically deleted 30 days after creation.</li>
+        </ul>
+
+        <h2>5. Permissions</h2>
+        <ul>
+          <li><strong>Location (required)</strong>: while using the app only.</li>
+          <li><strong>Camera (optional)</strong>: attach prescription/drug photos.</li>
+          <li><strong>Notifications (optional)</strong>: medication reminders.</li>
+          <li><strong>Photo library (optional)</strong>: attach existing photos.</li>
+        </ul>
+
+        <h2>6. Your Rights</h2>
+        <p>
+          You may clear local data anytime from the app settings. You may request deletion of
+          server-stored reviews, reports, or share snapshots by contacting us below.
+        </p>
+
+        <h2>7. Children's Privacy</h2>
+        <p>The App is not intended for children under 14 and does not knowingly collect their data.</p>
+
+        <h2>8. Security</h2>
+        <ul>
+          <li>All server traffic is encrypted via HTTPS.</li>
+          <li>Supabase Row Level Security prevents unauthorized access.</li>
+          <li>Sensitive content (e.g., prescription photos) is stored on-device only.</li>
+        </ul>
+
+        <h2>9. Changes</h2>
+        <p>
+          We will post any material changes in the app and on this page, and notify you in advance
+          for significant updates.
+        </p>
+
+        <h2>10. Contact</h2>
+        <p>
+          Email: <a href="mailto:kyongg02@gmail.com">kyongg02@gmail.com</a>
+        </p>
+      </section>
+
+      <footer>
+        © 2026 PharmacyNow · 약국나우
+      </footer>
+    </div>
+  </body>
+</html>
