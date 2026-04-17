@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>약국나우 · 데이터 삭제 요청 / Data Deletion Request</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #1f2937;
+        --muted: #6b7280;
+        --brand: #16a34a;
+        --border: #e5e7eb;
+        --card: #f9fafb;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0a0a0a;
+          --fg: #e5e7eb;
+          --muted: #9ca3af;
+          --brand: #22c55e;
+          --border: #1f2937;
+          --card: #111827;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+          "Noto Sans KR", "Pretendard", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.6;
+      }
+      header {
+        background: var(--brand);
+        color: #fff;
+        padding: 1.5rem 1rem;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+      header p {
+        margin: 0.25rem 0 0;
+        opacity: 0.9;
+        font-size: 0.85rem;
+      }
+      .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1.5rem 1rem 4rem;
+      }
+      nav.lang {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      nav.lang a {
+        flex: 1;
+        text-align: center;
+        padding: 0.6rem;
+        background: var(--border);
+        color: var(--fg);
+        border-radius: 9999px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      nav.lang a.active {
+        background: var(--brand);
+        color: #fff;
+      }
+      section h2 {
+        font-size: 1rem;
+        margin: 2rem 0 0.5rem;
+        color: var(--brand);
+      }
+      section h3 {
+        font-size: 0.9rem;
+        margin: 1rem 0 0.25rem;
+      }
+      section p,
+      section li {
+        font-size: 0.9rem;
+        color: var(--fg);
+      }
+      section ul,
+      section ol {
+        padding-left: 1.2rem;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+      .info-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 0.75rem;
+        padding: 1rem 1.25rem;
+        margin: 1rem 0;
+      }
+      .info-card dt {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 0.5rem;
+      }
+      .info-card dt:first-child { margin-top: 0; }
+      .info-card dd {
+        margin: 0.15rem 0 0;
+        font-size: 0.95rem;
+      }
+      .step {
+        background: var(--card);
+        border-left: 3px solid var(--brand);
+        padding: 0.75rem 1rem;
+        margin: 0.75rem 0;
+        border-radius: 0.25rem;
+      }
+      .step strong {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--brand);
+        margin-bottom: 0.25rem;
+      }
+      table.retention {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.5rem 0;
+        font-size: 0.85rem;
+      }
+      table.retention th,
+      table.retention td {
+        padding: 0.5rem 0.6rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+      table.retention th {
+        background: var(--card);
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.78rem;
+      }
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 1.25rem 0;
+        margin-top: 3rem;
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-align: center;
+      }
+      footer a {
+        color: var(--brand);
+        text-decoration: none;
+      }
+      .hidden { display: none; }
+      a { color: var(--brand); }
+    </style>
+    <script>
+      function show(lang) {
+        document.querySelectorAll('section[data-lang]').forEach((el) => {
+          el.classList.toggle('hidden', el.dataset.lang !== lang);
+        });
+        document.querySelectorAll('nav.lang a').forEach((a) => {
+          a.classList.toggle('active', a.dataset.lang === lang);
+        });
+        document.documentElement.lang = lang;
+      }
+      window.addEventListener('DOMContentLoaded', () => {
+        const saved = localStorage.getItem('lang');
+        const init = saved || ((navigator.language || 'ko').startsWith('ko') ? 'ko' : 'en');
+        show(init);
+        document.querySelectorAll('nav.lang a').forEach((a) => {
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.setItem('lang', a.dataset.lang);
+            show(a.dataset.lang);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>약국나우 데이터 삭제 요청</h1>
+      <p>PharmacyNow Data Deletion Request</p>
+    </header>
+    <div class="container">
+      <nav class="lang">
+        <a href="#ko" data-lang="ko">한국어</a>
+        <a href="#en" data-lang="en">English</a>
+      </nav>
+
+      <section data-lang="ko">
+        <p class="meta">최종 업데이트: 2026-04-17</p>
+
+        <div class="info-card">
+          <dl>
+            <dt>앱 이름</dt>
+            <dd>약국나우 (PharmacyNow)</dd>
+            <dt>패키지명</dt>
+            <dd>kr.pharmacynow.app</dd>
+            <dt>개발자</dt>
+            <dd>PharmacyNow</dd>
+            <dt>문의 이메일</dt>
+            <dd><a href="mailto:kyongg02@gmail.com">kyongg02@gmail.com</a></dd>
+          </dl>
+        </div>
+
+        <h2>1. 삭제 가능한 데이터 유형</h2>
+        <p>약국나우는 사용자 계정을 만들지 않으며, 익명 디바이스 식별자(해시)로만 작성한 콘텐츠를 식별합니다. 다음 데이터를 삭제 요청할 수 있습니다.</p>
+        <ul>
+          <li><strong>약국 리뷰</strong>: 별점(친절·설명·대기), 코멘트 텍스트</li>
+          <li><strong>리뷰 신고 이력</strong>: 신고 사유, 신고 일시</li>
+          <li><strong>영업정보 오류 신고</strong>: 신고 유형, 메모</li>
+          <li><strong>복약 공유 스냅샷</strong>: "가족과 공유"로 생성한 30일짜리 링크 데이터</li>
+          <li><strong>익명 디바이스 ID(해시)</strong>: 위 데이터에 연결된 식별자</li>
+        </ul>
+        <p class="meta">※ 위치 정보, 처방전 사진, 복약 알림 설정 등은 처음부터 서버에 전송되지 않으며 기기에만 저장됩니다. 앱을 삭제하거나 앱 내 "전체 삭제"로 즉시 파기됩니다.</p>
+
+        <h2>2. 삭제 요청 방법</h2>
+
+        <h3>방법 1: 앱 내에서 직접 삭제 (가장 빠름)</h3>
+        <div class="step">
+          <strong>STEP 1</strong>
+          약국나우 앱 실행 → 하단 <em>설정</em> 탭으로 이동
+        </div>
+        <div class="step">
+          <strong>STEP 2</strong>
+          <em>"내가 작성한 리뷰"</em> 또는 <em>"내가 신고한 항목"</em> 선택
+        </div>
+        <div class="step">
+          <strong>STEP 3</strong>
+          개별 항목 우측 <em>"삭제"</em> 버튼 → 즉시 서버에서 영구 삭제
+        </div>
+        <div class="step">
+          <strong>전체 삭제</strong>
+          설정 → <em>"내 데이터 전체 삭제"</em> → 본 기기에서 작성한 모든 서버 데이터 일괄 삭제
+        </div>
+
+        <h3>방법 2: 이메일로 삭제 요청</h3>
+        <p>아래 양식으로 <a href="mailto:kyongg02@gmail.com?subject=%5B%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%82%AD%EC%A0%9C%20%EC%9A%94%EC%B2%AD%5D%20%EC%95%BD%EA%B5%AD%EB%82%98%EC%9A%B0">kyongg02@gmail.com</a>으로 보내주세요.</p>
+        <ol>
+          <li><strong>제목</strong>: [데이터 삭제 요청] 약국나우</li>
+          <li><strong>본문</strong>:
+            <ul>
+              <li>삭제할 데이터 유형 (예: 약국 리뷰)</li>
+              <li>식별 정보 중 하나 이상:
+                <ul>
+                  <li>리뷰 작성한 약국 이름·주소</li>
+                  <li>리뷰 작성 대략적인 날짜</li>
+                  <li>또는 앱 설정 화면에 표시된 "내 디바이스 ID" 끝자리 8자</li>
+                </ul>
+              </li>
+              <li>삭제 범위: 일부 / 전체</li>
+            </ul>
+          </li>
+        </ol>
+        <p><strong>처리 기간</strong>: 영업일 기준 7일 이내 처리 후 완료 회신 드립니다.</p>
+
+        <h2>3. 삭제 후 데이터 보관 정책</h2>
+        <table class="retention">
+          <thead>
+            <tr>
+              <th>데이터 유형</th>
+              <th>삭제 후 보관 기간</th>
+              <th>보관 사유</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>약국 리뷰 본문</td>
+              <td>즉시 영구 삭제</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>리뷰·오류 신고 기록</td>
+              <td>즉시 영구 삭제</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>복약 공유 스냅샷</td>
+              <td>즉시 영구 삭제</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>데이터베이스 자동 백업</td>
+              <td>최대 30일</td>
+              <td>장애 복구 목적, 30일 후 백업본도 자동 파기</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="meta">※ 약국나우는 법령상 의무 보관이 필요한 개인정보를 수집하지 않습니다(전자상거래·금융 거래 없음). 따라서 삭제 후 별도 의무 보관 데이터는 없습니다.</p>
+
+        <h2>4. 계정 삭제와의 관계</h2>
+        <p>약국나우는 <strong>회원 가입·로그인 기능이 없습니다</strong>. 사용자 식별은 익명 디바이스 해시로만 이루어지며, 따라서 "계정 삭제"는 별도로 존재하지 않습니다. 위 절차로 작성한 콘텐츠와 식별자가 모두 삭제되면 사용자에 대한 모든 정보가 시스템에서 제거됩니다.</p>
+
+        <h2>5. 문의</h2>
+        <p>
+          본 페이지나 삭제 절차에 대한 문의는 아래로 연락 주세요.<br />
+          이메일: <a href="mailto:kyongg02@gmail.com">kyongg02@gmail.com</a>
+        </p>
+      </section>
+
+      <section data-lang="en" class="hidden">
+        <p class="meta">Last updated: 2026-04-17</p>
+
+        <div class="info-card">
+          <dl>
+            <dt>App Name</dt>
+            <dd>PharmacyNow (약국나우)</dd>
+            <dt>Package</dt>
+            <dd>kr.pharmacynow.app</dd>
+            <dt>Developer</dt>
+            <dd>PharmacyNow</dd>
+            <dt>Contact</dt>
+            <dd><a href="mailto:kyongg02@gmail.com">kyongg02@gmail.com</a></dd>
+          </dl>
+        </div>
+
+        <h2>1. Data Eligible for Deletion</h2>
+        <p>PharmacyNow has no user accounts; user-generated content is identified only by an anonymous device hash. You may request deletion of:</p>
+        <ul>
+          <li><strong>Pharmacy reviews</strong>: ratings (friendliness, explanation, wait) and comment text</li>
+          <li><strong>Review reports</strong>: report reason and timestamp</li>
+          <li><strong>Data error reports</strong>: report kind and note</li>
+          <li><strong>Medication share snapshots</strong>: 30-day shared links created via "Share with family"</li>
+          <li><strong>Anonymous device hash</strong>: the identifier linking the above data</li>
+        </ul>
+        <p class="meta">Note: Location, prescription photos, and medication reminder settings are never sent to our servers in the first place — they live only on your device and are erased when you uninstall the app or use "Delete all" in settings.</p>
+
+        <h2>2. How to Request Deletion</h2>
+
+        <h3>Option 1: In-app deletion (fastest)</h3>
+        <div class="step">
+          <strong>STEP 1</strong>
+          Open PharmacyNow → bottom <em>Settings</em> tab
+        </div>
+        <div class="step">
+          <strong>STEP 2</strong>
+          Tap <em>"My Reviews"</em> or <em>"My Reports"</em>
+        </div>
+        <div class="step">
+          <strong>STEP 3</strong>
+          Tap <em>"Delete"</em> next to each item — permanently removed from the server
+        </div>
+        <div class="step">
+          <strong>Delete all</strong>
+          Settings → <em>"Delete all my data"</em> erases every server-side record created from this device at once
+        </div>
+
+        <h3>Option 2: Request by email</h3>
+        <p>Email <a href="mailto:kyongg02@gmail.com?subject=%5BData%20Deletion%20Request%5D%20PharmacyNow">kyongg02@gmail.com</a> with the following:</p>
+        <ol>
+          <li><strong>Subject</strong>: [Data Deletion Request] PharmacyNow</li>
+          <li><strong>Body</strong>:
+            <ul>
+              <li>Type of data to delete (e.g., pharmacy reviews)</li>
+              <li>At least one identifier:
+                <ul>
+                  <li>Pharmacy name/address you reviewed</li>
+                  <li>Approximate date of the review</li>
+                  <li>Or the last 8 characters of the "My Device ID" shown in app settings</li>
+                </ul>
+              </li>
+              <li>Scope: partial / all</li>
+            </ul>
+          </li>
+        </ol>
+        <p><strong>Turnaround</strong>: We reply with a completion confirmation within 7 business days.</p>
+
+        <h2>3. Retention Policy After Deletion</h2>
+        <table class="retention">
+          <thead>
+            <tr>
+              <th>Data type</th>
+              <th>Retention after deletion</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Review content</td>
+              <td>Immediately and permanently deleted</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Review/error report records</td>
+              <td>Immediately and permanently deleted</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Share snapshots</td>
+              <td>Immediately and permanently deleted</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Database automatic backups</td>
+              <td>Up to 30 days</td>
+              <td>Disaster recovery; backups are also purged after 30 days</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="meta">PharmacyNow does not collect any personal data subject to legal retention obligations (no e-commerce, no financial transactions). No additional data is retained after deletion.</p>
+
+        <h2>4. Account Deletion</h2>
+        <p>PharmacyNow has <strong>no sign-up or login</strong>. Users are identified only by an anonymous device hash, so there is no separate "account deletion" — once your content and identifier are removed via the steps above, no information about you remains in our system.</p>
+
+        <h2>5. Contact</h2>
+        <p>
+          Questions about this page or the deletion process:<br />
+          Email: <a href="mailto:kyongg02@gmail.com">kyongg02@gmail.com</a>
+        </p>
+      </section>
+
+      <footer>
+        © 2026 PharmacyNow · 약국나우 ·
+        <a href="../">개인정보처리방침 / Privacy Policy</a>
+      </footer>
+    </div>
+  </body>
+</html>
